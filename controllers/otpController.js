@@ -2,7 +2,6 @@ const Otps = require('../models/otpModel.js');
 const randomstring = require('randomstring');
 const sendEmail = require('../utils/sendEmails');
 
-// Generate OTP
 function generateOTP() {
     return randomstring.generate({
         length: 6,
@@ -10,15 +9,13 @@ function generateOTP() {
     });
 }
 
-// Send OTP to the provided email
-exports.sendOTP = async (req, res, next) => {
+exports.sendOTP = async (req, res) => {
     try {
         const { email } = req.query;
         const otp = generateOTP(); // Generate a 6-digit OTP
         const newOTP = new Otps({ email, otp });
         await newOTP.save();
         
-        // Send OTP via email
         await sendEmail({
             to: email,
             subject: 'Your OTP',
@@ -32,17 +29,14 @@ exports.sendOTP = async (req, res, next) => {
     }
 };
 
-// Verify OTP provided by the user
-exports.verifyOTP = async (req, res, next) => {
+exports.verifyOTP = async (req, res) => {
     try {
         const { email, otp } = req.query;
         const existingOTP = await Otps.findOneAndDelete({ email, otp });
         
         if (existingOTP) {
-            // OTP is valid
             res.status(200).json({ success: true, message: 'OTP verification successful' });
         } else {
-            // OTP is invalid
             res.status(400).json({ success: false, error: 'Invalid OTP' });
         }
     } catch (error) {
