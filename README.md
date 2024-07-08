@@ -56,7 +56,7 @@ npm start
 - SMTP (Simple Mail Transfer Protocol)
 
 ## Service
-- Gmail (2FA for App Passwords)
+- Gmail 
 
 ## Technologies Used
 
