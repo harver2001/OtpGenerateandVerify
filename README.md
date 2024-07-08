@@ -2,31 +2,9 @@
 
 This is a simple OTP (One Time Password) generator application built using Node.js. It provides functionality to generate and send OTPs via email.
 
-## Installation
-
-Make sure you have Node.js and npm (Node Package Manager) installed on your system.
-
-1. Clone this repository:
-
-    ```bash
-    git clone https://github.com/manthanank/otp-generator.git
-    ```
-
-2. Navigate into the project directory:
-
-    ```bash
-    cd otp-generator
-    ```
-
-3. Install dependencies:
-
-    ```bash
-    npm install
-    ```
-
 ## Configuration
 
-Before running the application, you need to set up some configuration variables. Copy the `.env.example` file and rename it to `.env`. Then, update the variables with your own values:
+Setting up the environment variables(env)
 
 - `PORT`: The port on which the server will run.
 - `MONGO_URI`: The URI for your MongoDB database.
@@ -74,12 +52,18 @@ npm start
     }
     ```
 
+## Protocol Used
+- SMTP (Simple Mail Transfer Protocol)
+
+## Service
+- Gmail (2FA for App Passwords)
+
 ## Technologies Used
 
 - Node.js
 - Express.js
-- MongoDB
-- Nodemailer
+- MongoDB for storing OTPs temporarily
+- Nodemailer for sending mail
 - Randomstring
 - Dotenv
 
